@@ -52,7 +52,7 @@ virginica  | 4.9    | 2.5   | 4.5    | 1.7
 * The matrix of the rest of columns (.blue[attributes] or .blue[features]) is usually referred
 as matrix .blue[_X_]
 
-.footnote[.red[*] _Source_ : _Iris_ problem UCI repository (Frank &amp; Asunción, 2010)]
+.footnote[.red[*] _Source_ : _Iris_ problem UCI repository (Frank | Asunción, 2010)]
 
 ---
 
@@ -79,7 +79,7 @@ quality | density | pH   | sulphates | alcohol
 8       | 0.9973  | 3.35 | 0.86      | 12.8
 3       | 0.9994  | 3.16 | 0.63      | 8.4
 7       | 0.99514 | 3.44 | 0.68      | 10.55
-1599 examples & 12 columns (11 attributes + 1 target).red[*]
+1599 examples | 12 columns (11 attributes + 1 target).red[*]
 ]
 
 The main diference between classification and regression is the _Y_ or target values:
@@ -90,7 +90,7 @@ Example: _Iris_, {“setosa”, “virginica”, “versicolor”}.
 * .blue[Regression]: continuous or real values <br>
 Example: _WineQuality_, values from 0 to 10.
 
-.footnote[.red[*] _Source_ : _wine quality_ problem from UCI repository (Frank &amp; Asunción, 2010)]
+.footnote[.red[*] _Source_ : _wine quality_ problem from UCI repository (Frank | Asunción, 2010)]
  
 
 ---
@@ -210,7 +210,7 @@ Unseen regression example on _WineQuality_]
 # 1 Nearest Neighbors algorithm
 
 ### Algorithm
-* classification & regression
+* classification | regression
 
 $$h(T)=y_i$$
 
@@ -242,11 +242,11 @@ $$h(T)=average(S)\text{, if regression}$$
 
 ### Examples
 
-- .blue[classification]: Iris \& euclidean distance
+- .blue[classification]: Iris | euclidean distance
 
 $$h(T)=mode({setosa, setosa, versicolor})=setosa$$
 
-- .blue[regression]: WineQuality \& euclidean distance
+- .blue[regression]: WineQuality | euclidean distance
 
 $$h(T)=average({6,4,7})=5.7$$
 
@@ -348,7 +348,7 @@ class: left, middle, inverse
 
 #### .blue[Classify]: apply 1NN with centroids as data 
 
-#### Example: Iris & euclidean distance 
+#### Example: Iris | euclidean distance 
 
 $$distances = (0.23, 3.09, 4.65)$$
 
@@ -384,9 +384,9 @@ class: left, middle, inverse
 
   - .cyan[Naïve Bayes]
 
-  - LDA & Logistic Regression
+  - LDA 
 
-  - Sequences
+  - Logistic Regression
 
 * Rules
 
@@ -400,6 +400,8 @@ class: left, middle, inverse
 
 # Probability-based methods
 
+- Induction principle: .blue[probabilities]
+
 | class      | cap-shape | cap-color | gill-size | gill-color |
 |:-----------|:----------|:----------|:----------|:-----------|
 | poisonous  | convex    | brown     | narrow    | black      |
@@ -409,20 +411,39 @@ class: left, middle, inverse
 | edible     | convex    | yellow    | broad     | brown      |
 | edible     | bell      | white     | broad     | brown      |
 | poisonous  | convex    | white     | narrow    | pink       |
-.center[up to 8 124 examples & 22 attributes .red[*]]
+.center[up to 8 124 examples | 22 attributes .red[*]]
 
+- What is .blue[$P(poisonous)$]?
 
-- What is $P(poisonous)$?
+.footnote[.red[*]  _Source_ : _Mushroom_ problem from UCI repository (Frank | Asunción, 2010)]
+
+---
+
+# Probability-based methods
+
+- In most cases we estimate it from data (.blue[maximum likelihood estimation])
 
 $$P(poisonous)=\frac{N(poisonous)}{N}=\frac{3}{7}\approx 0.429$$
 
-.footnote[.red[*]  _Source_ : _Mushroom_ problem from UCI repository (Frank &amp; Asunción, 2010)]
+- How can be give a prediction from probabilities to next example? 
+
+| class | cap-shape | cap-color | gill-size | gill-color |
+|:------|:----------|:----------|:----------|:-----------|
+| ??    | convex    | brown     | narrow    | black      |
+
+- Some algorithms:
+
+  - Naïve Bayes
+
+  - LDA (Linear Discriminant Analysis)
+
+  - Logistic regression
 
 ---
 
 # Naïve Bayes
 
-#### Learning Model
+#### .blue[Learning Model]
 
 $$\text{model}=[P(y)\simeq\frac{N(y)}{N},P(x_i|y)\simeq\frac{N(x_i|y)}{N(y)};\forall y \forall x_i]$$
 
@@ -453,7 +474,7 @@ $$\text{model}=[P(y)\simeq\frac{N(y)}{N},P(x_i|y)\simeq\frac{N(x_i|y)}{N(y)};\fo
 
 # Naïve Bayes
 
-#### Classification
+#### .blue[Classification]
 
 $$h(T) \approx argmax_y P(y)\cdot P(t_1|y)\cdot\ldots\cdot P(t_n|y)$$
 
@@ -472,361 +493,416 @@ $$P(edible|T) = 0.571 \cdot 0.5 \cdot 0 \cdot 0 \cdot 0.25 = 0$$
 
 # Naïve Bayes
 
-#### Notes
+#### .blue[Notes]:
 
 - It needs a smoothing technique to avoid zero counts <br>
   - Example: Laplace
 $$P(x_i|y)\approx\frac{N(x_i|y)+1}{N(y)+N}$$
 
+- It assumes conditional independence between every pair of features
+
 - It is empiricaly a decent classifier but a bad estimator
   - This means that $P(y|T)$ is not a good probability 
 
-#### Implementation
-
-- Using LINQ of C#: [view](codes/naiveBayes.html).red[*] / [output](codes/modelNB.txt) / [download code](codes/naiveBayes.cs)
-
-.footnote[.red[*] Formated with http://hilite.me/]
-
 ---
 
-# Gaussian Naïve Bayes I
+# Gaussian Naïve Bayes
 
-* How about numerical features?
+#### What about numerical features?
 
-| Brake? | Distance | Speed |
-|-------:|---------:|------:|
-| Y      | 2.4      | 11.3  |
-| Y      | 3.2      | 70.2  |
-| N      | 75.7     | 72.7  |
-| N      | 2.8      | 15.2  |
-| %?     | 79.2     | 12.1  |
-.center[Source: (Millington, 2019)]
+.blue[Gaussian Naïve Bayes] is an implementation assuming gaussian distribution:
 
 $$P(x_i|y)=\frac{1}{\sqrt{2\pi\sigma_y^2}}\exp\left(-\frac{(x_i-\mu_y)^2}{2\sigma_y^2}\right)$$
 
-.center[where $\mu_y=\frac{x_1^y+\cdots+x_n^y}{n_y}$ and $\sigma_y^2=\frac{(x_1^y - \mu_y)^2+\cdots+(x_n^y - \mu_y)^2}{n_y}$]
+#### sklearn:
 
+.blue[Classification]:
+
+```python3
+from sklearn.naive_bayes import GaussianNB
+clf = GaussianNB()
+```
+It has no .blue[parameters]
+
+.blue[User guide]: 
+
+.tiny[[https://scikit-learn.org/stable/modules/naive_bayes.html](https://scikit-learn.org/stable/modules/naive_bayes.html)]
+
+---
+class: left, middle, inverse
+
+# Outline
+
+* .brown[Introduction]
+
+* .brown[Distances]
+
+* .cyan[Probabilities]
+
+  - .brown[Naïve Bayes]
+
+  - .cyan[LDA]
+
+  - Logistic Regression
+
+* Rules
+
+* Hyperplanes
+
+* Learning Theory
+
+* References
 
 ---
 
-# Gaussian Naïve Bayes II
+# Linear Discriminant Analysis
 
-.col5050[
-.col1[
-**Learning model:**
+also from bayes rule | gaussian distributions:
 
-| $y$  | $P(y)$ |
-|:-----|-------:|
-| Y    | 0.5    |
-| N    | 0.5    |
+$$h(T)\simeq argmax_y\frac{P(T|y)P(y)}{P(T)}$$
 
-<br>
+where $d$ = number of features and:
 
-|                 | Distance | Speed     |
-|:----------------|---------:|----------:|
-| $\mu_Y$         | 2.8      | 40.75     |
-| $\mu_N$         | 39.25    | 43.95     |
-| $\sigma_Y^2$    | 0.32     | 1734.605  |
-| $\sigma_N^2$    | 2657.205 | 1653.125  |
-]
-.col2[
-**Classification:**
+$$P(X)=\sum_{\forall y}P(X|y)P(y)$$
 
-$$P(Y|T)=0.5\cdot 0.0\cdot 0.00756 = 0.0$$
+$$P(y)=\frac{N(y)}{N}$$
 
-$$P(N|T)=0.5\cdot 0.00573\cdot 0.00722 = 0.00002$$
-
-$$h(T)=N$$
-
-**Note:**
-
-$$P(speed=12.1|Y)=\frac{1}{\sqrt{2\cdot\pi\cdot 1734.605}}\cdot$$
-
-$$\cdot \exp\left(-\frac{(12.1-40.75)^2}{2\cdot 1734.605}\right)=0.00669$$
-]]
+$$P(X|y)=\frac{1}{\sqrt{(2\pi)^d\vert\sum_k\vert}}\exp\left(-\frac{1}{2}(X-\mu_y)^T\sum_k^{-1}(X-\mu_k)\right)$$
 
 ---
 
-# Gaussian Naïve Bayes III
+# Dimensionality reduction
 
-**Implementation:**
+#### PCA vs LDA:
 
-- Using LINQ of C#: 
+![:scale 45%](figures/pca.png)
+![:scale 45%](figures/lda.png)
 
-  - [view](codes/gaussianNaiveBayes.html).red[*] 
+.tiny[.red[Source]: [https://sebastianraschka.com/faq/docs/lda-vs-pca.html](https://sebastianraschka.com/faq/docs/lda-vs-pca.html)]
 
-  - [output](codes/modelGNB.txt)
+---
 
-  - [download code](codes/gaussianNaiveBayes.cs)
+# sklearn
 
-.footnote[.red[*] Formated with http://hilite.me/]
+#### .blue[Dimensionality reduction]: 
+
+```Python3
+from sklearn.decomposition import PCA
+pca = PCA(n_components=2)
+Xpca = pca.fit(X).transform(X)
+
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+lda = LinearDiscriminantAnalysis(n_components=2)
+Xlda = lda.fit(X, Y).transform(X)
+```
+
+#### .blue[Classification]: 
+
+```Python3
+from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+clf = LinearDiscriminantAnalysis(shrinkage='auto',solver='lsqr')
+```
+
+#### .blue[User Guide]:
+
+.tiny[[https://scikit-learn.org/stable/modules/lda_qda.html](https://scikit-learn.org/stable/modules/lda_qda.html)]
+
+---
+class: left, middle, inverse
+
+# Outline
+
+* .brown[Introduction]
+
+* .brown[Distances]
+
+* .cyan[Probabilities]
+
+  - .brown[Naïve Bayes]
+
+  - .brown[LDA]
+
+  - .cyan[Logistic Regression]
+
+* Rules
+
+* Hyperplanes
+
+* Learning Theory
+
+* References
+
+---
+
+# Logistic Regression 
+
+- Also known as Maximum Entropy
+
+- Regression of the probability
+
+- .blue[Binary Classification]:
+
+$$h_\theta(x)=\sigma(x^T\theta)$$
+
+$$sigma(t)=\frac{1}{1+\exp(-t)}$$
+
+.center[![scale 30%](figures/logisticCurve.png)]
+
+.tiny[.red[Source]: [https://en.wikipedia.org/wiki/Logistic_function](https://en.wikipedia.org/wiki/Logistic_function)]
+
+---
+
+# sklearn
+
+#### .blue[Classification]:
+
+```Python3
+from sklearn.linear_model import LogisticRegression
+clf = LogisticRegression()
+```
+#### .blue[Parameters]:
+
+```Python3
+solver = default 'lbfgs'
+max_iter = default 100
+```
+
+#### .blue[User guide]:
+
+.tiny[[https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression](https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression)]
+
+---
+class: left, middle, inverse
+
+# Outline
+
+* .brown[Introduction]
+
+* .brown[Distances]
+
+* .brown[Probabilities]
+
+* .cyan[Rules]
+
+  - .cyan[Decision Trees]
+
+  - Ensembles
+
+* Hyperplanes
+
+* Learning Theory
+
+* References
+
+---
+
+# Rules-based methods
+
+-  Induction principle: .blue[rules]
+
+| class | cap-shape | cap-color | gill-color |
+|-------|-----------|-----------|------------|
+| poisonous | convex | brown | black |
+| edible | convex | yellow | black |
+| edible | bell | white | brown |
+| poisonous | convex | white | brown |
+| edible | convex | yellow | brown |
+| edible | bell | white | brown |
+| poisonous | convex | white | pink |
+.center[up to 8124 examples | 22 attributes.red[*]]
+
+- Which rules can be extracted from data? 
+
+.blue[$$\text{gill-color}=\text{pink}\Longrightarrow\text{poisonous}$$]
+
+.footnote[.red[*] .red[Source]: ``mushroom'' problem from UCI Repository (Frank | Asunción, 2010)]
 
 ---
 
 # Decision Trees
 
-**Splitting measure:**
+.blue[Resulting tree]:
 
-- Decision Trees: $accuracy=\frac{N(ok)}{N}$
+.center[![:scale 50%](figures/dt.png)]
 
-- ID3: $entropy=-\sum_{\forall y} P(y) \cdot log_2(P(y))$
+.blue[Classification]: exploring the tree using test
 
-- CART: $gini = 1 - \sum_{\forall y} P(y)^2$ + binary trees
+| class | cap-shape | cap-color | gill-color |
+|---|---|---|---|
+| ?? | convex | brown | black |
 
-- .blue[Our approach]: $gini$ + k-ary trees
-
-  - nominal and numeric features
-
-  - classification and regression
-
-  - one of the easiest decision trees
+.center[.blue[prediction: poisonous]]
 
 ---
 
-# Example I
+# Learning Decision Trees
 
-.cols5050[
-.col1[
-| class      | cap-shape | cap-color |
-|:-----------|:----------|:----------|
-| poisonous  | convex    | brown     |
-| edible     | convex    | yellow    |
-| edible     | bell      | white     |
-| poisonous  | convex    | white     |
-| edible     | convex    | yellow    |
-| edible     | bell      | white     |
-| poisonous  | convex    | white     |
-]
-.col2[
-**algorithm:**
+.blue[Learn]: 
 
-each node of the tree from 
+build a tree by recursively splitting for one of the attributes with most accuracy
 
-the minimum weighted sum of
+#### Example:
 
- _Gini index_:
+.blue[Step 1]: every attribute is evaluated.red[*]
 
-.small[$gini = 1 - \sum_{\forall y} P(y)^2$]
-]]
+$$\text{cap-shape}=\frac{3+2}{7}=0.71$$
+$$\text{cap-color}=\frac{1+2+2}{7}=0.71$$
+$$\text{gill-color}=\frac{1+3+1}{7}=0.71$$
+
+.footnote[.red[*] the number of examples with the mode is assigned to each value]
 
 ---
 
-# Example II
+# Learning Decision Trees
 
-**cap-shape:**
+.blue[Step 2]: one of the best attributes is selected as a node of the tree: 
 
-| cap-shape | poisonous | edible | #examples |
-|----------:|----------:|-------:|----------:|
-| convex    | 3         | 2      | 5         |
-| bell      | 0         | 2      | 2         |
+$$\text{cap-color}$$
 
-.small[
-.blue[For each _value_:]
+.blue[Step 3]: for every value with only a class a leaf is created: 
 
-$gini(\text{cap-shape}=\text{convex})=1-(\frac{3}{5})^2-(\frac{2}{5})^2=0.48$
+$$\text{brown} \Longrightarrow \text{poisonous}$$
 
-$gini(\text{cap-shape}=\text{bell})=1-(\frac{0}{2})^2-(\frac{2}{2})^2=0.0$
+$$\text{yellow} \Longrightarrow \text{edible}$$
 
-.blue[_Weighted sum_:]
+.blue[Step 4]: a new set is built for the rest of values
 
-$gini(\text{cap-shape})=\frac{5}{7}\cdot 0.48+\frac{2}{7}\cdot 0.0=0.343$
-]
+.center[_white_ examples without _cap-color_]
 
----
-
-# Example III
-
-**cap-color:**
-
-| cap-color | poisonous | edible | #examples |
-|----------:|----------:|-------:|----------:|
-| brown     | 1         | 0      | 1         |
-| yellow    | 0         | 2      | 2         |
-| white     | 2         | 2      | 4         |
-
-.small[
-.blue[For each _value_:]
-
-$gini(\text{cap-color}=\text{brown})=1-(\frac{1}{1})^2-(\frac{0}{1})^2=0.0$
-
-$gini(\text{cap-color}=\text{yellow})=1-(\frac{0}{2})^2-(\frac{2}{2})^2=0.0$
-
-$gini(\text{cap-color}=\text{white})=1-(\frac{2}{4})^2-(\frac{2}{4})^2=0.5$
-
-.blue[_Weighted sum_:]
-
-$gini(\text{cap-color})=\frac{1}{7}\cdot 0.0+\frac{2}{7}\cdot 0.0+\frac{4}{7}\cdot 0.5=0.286$
-]
+| class | cap-shape | gill-color |
+|---|---|---|
+| edible | bell | brown |
+| poisonous | convex | brown |
+| edible | bell | brown |
+| poisonous | convex | pink |
 
 ---
 
-# Example IV
+# Learning Decision Trees
 
-**Selecting best feature:**
+.blue[Step 5]: the algorithm restarts with previous set: 
 
-- best feature will be that with minimum _gini index_:
+$$\text{cap-shape}=\frac{2+2}{4}=1$$
 
-.small[
-$$\text{best_feature}=\min((0.343,\text{cap-shape}),(0.286,\text{cap-color}))=\text{cap-color}$$
-]
+$$\text{gill-color}=\frac{2+1}{4}=0.75$$
 
-- every value with only a class will be a _leaf_:
-  - brown $\rightarrow$ poisonous
-  - yellow $\rightarrow$ edible
-
-- a new set is built for the rest of values
-
-.center[
-| class      | cap-shape |
-|:-----------|:----------|
-| edible     | bell      |
-| poisonous  | convex    |
-| edible     | bell      |
-| poisonous  | convex    |
-_white_ examples without _cap-color_
-]
-
-- the process restarts with the new set
+.blue[Step 6]: the algorithm ends when no attributes left or get full accuracy
 
 ---
 
-# Example V
+# Cutting Points
 
-**Resulting Tree:**
+- What about .blue[numerical attributes]?
 
-.center[
-![:scale 75%](figures/dt.png)
-]
+| class | length | width |
+|---|---|---|
+| versicolor | 6.1 | 2.9 |
+| versicolor | 5.6 | 2.9 |
+| virginica | 7.6 | 3.0 |
+| virginica | 4.9 | 2.5 |
 
+- .blue[Cutting points] for _width_ attribute
 
----
-
-# Cutting Points I
-
-**What about numerical attributes?**
-
-| class      | width |
-|:-----------|------:|
-| versicolor | 2.9   |
-| versicolor | 2.9   |
-| virginica  | 3.0   |
-| virginica  | 2.5   |
-
-**Cutting points:**
-
-| class      | width | cutting points | weighted ginis |
-|:-----------|------:|---------------:|:---------------|
-| virginica  | 2.5   |      |   | 
-| versicolor | 2.9   | 2.7  | $\frac{1}{4}\cdot 0.0+\frac{3}{4}\cdot 0.45=0.0.3375$ |
-| versicolor | 2.9   |      |   |
-| virginica  | 3.0   | 2.95 | $\frac{3}{4}\cdot 0.45+\frac{1}{4}\cdot 0.0=0.0.3375$ |
-.center[.small[cutting points for _width_ attribute]]
+| class | width | cutting points | accuracy |
+|---|---:|---:|---|
+| virginica | 2.5 | | |
+| versicolor | 2.9 | 2.7 | $\frac{1+2}{4}=0.75$ |
+| versicolor | 2.9 | | |
+| virginica | 3.0 | 2.95 | $\frac{2+1}{4}=0.75$ |
 
 ---
 
-# Cutting Points II
+# Cutting Points
 
-**Gini example:**
+#### Resulting .blue[tree]:
 
-| width | versicolor | virginica | #examples | gini |
-|:------|-----------:|----------:|----------:|:-----|
-| < 2.7 | 0 | 1 | 1 | $1-(\frac{0}{1})^2-(\frac{1}{1})^2=0$ |
-| > 2.7 | 2 | 1 | 3 | $1-(\frac{2}{3})^2-(\frac{1}{3})^2=0.45$ |
-
-**Resulting Tree:**
-
-.center[
-![:scale 50%](figures/dt-ct.png)
-]
+.center[![scale 70%](figures/dt-pt.png)]
 
 ---
 
-# Regression
+# ID3
 
-- standard deviation as splitting measure
-
-$$\sigma=\sqrt{\frac{(x_1-\mu)^2+\dots+(x_n-\mu)^2}{n}}$$
-
-.center[where $\mu=\frac{x_1+\dots+x_n}{n}$]
-
-.cols5050[
-.col1[
-**example:**
-
-| target | outlook | wind   |
-|:-------|:--------|:-------|
-| 25     | sun     | weak   |
-| 30     | sun     | strong |
-| 52     | rain    | weak   |
-| 23     | rain    | strong |
-| 45     | rain    | weak   |
-.center[.small[[Source](https://sefiks.com/2018/08/28/a-step-by-step-regression-decision-tree-example/)]]
-]
-.col2[
-**total amounts:**
-
-$$\mu=35$$
-$$\sigma=11.472$$
-]]
-
----
-
-# Regression II
-
-.cols5050[
-.col1[
-**outlook:**
-
-| outlook | $\mu$ | $\sigma$ | #examples |
-|:--------|------:|---------:|----------:|
-| sun     | 27.5  | 2.5      | 2         |
-| rain    | 40.0  | 12.356   | 3         |
-]
-.col2[
-**weighted sum:**
-
-$$\sigma_{weighted}=\frac{2}{5}\cdot 2.5+\frac{3}{5}\cdot 12.356=8.414$$
-
-**$\sigma$ reduction:**
-$$\sigma_{reduction}=11.543-8.414=3.129$$
-]]
-
-.cols5050[
-.col1[
-**wind:**
-
-| wind   | $\mu$  | $\sigma$ | #examples |
-|:-------|-------:|---------:|----------:|
-| weak   | 40.667 | 11.441   | 3         |
-| strong | 26.5   | 3.5      | 2         |
-]
-.col2[
-**weighted sum:**
-
-$$\sigma_{weighted}=\frac{3}{5}\cdot 11.441+\frac{2}{5}\cdot 3.5=8.265$$
-
-**$\sigma$ reduction:**
-$$\sigma_{reduction}=11.543-8.265=3.278$$
-]]
-
-Wins the highest score: .blue[**wind**]
-
----
-
-# Notes on Decision Trees
-
-- Tends to overfitting when leafs with few examples
-
-- High variance
-  - small changes in training sets produce different trees
-
-- **Prunning**: for avoiding overfitting
-  - less than 5 instances 
-  - maximum depth
-
-- Previous regression tree by averaging leaf instances:
+#### .blue[ID3]: decision tree variant
  
-.center[![:scale 50%](figures/dtr.png)]
+Entropy is a measure of the amount of uncertainty in the data:
+
+$$H(S)=-\sum_{y\in Y}p(y)log_2(p(y))$$
+
+Information gain is a measure of the difference of entropy before and after splitting:
+
+.center[![:scale 50%](figures/gsxj.png)]
+
+<!---
+$$G(S,x_j)=H(S)-\sum_{v\in x_j}p(v)H(S_v)$$
+-->
+
+---
+
+# CART
+
+#### .blue[CART]: another decision tree variant
+
+- Gini impurity is a measure of how often a randomly chosen element from the set would be incorrectly labeled 
+
+$$IG(p)=1-\sum_{y\in Y}p_y^2$$
+
+.center[It is used instead of entropy]
+
+- It allows regression
+
+- Example:
+
+.center[.tiny[[https://sefiks.com/2018/08/27/a-step-by-step-cart-decision-tree-example/](https://sefiks.com/2018/08/27/a-step-by-step-cart-decision-tree-example/)]]
+
+.center[It also contains a regression example]
+
+---
+
+# Some Issues
+
+Models looks like.red[*]:
+
+![:scale 45%](figures/dtsC.png)
+![:scale 35%](figures/dtsR.png)
+
+- Resulting rules are very understandable for humans
+
+- Normalization do not affects trees
+
+- Complex and big trees tends to overfitting (they do not generalize very well)
+
+- Small changes in data may produce big different trees
+
+.footnote[.red[*] .red[Source]: [https://scikit-learn.org/stable/modules/tree.html](https://scikit-learn.org/stable/modules/tree.html)]
+
+---
+
+# sklearn
+
+#### .blue[Classification]:
+
+```Python3
+from sklearn.tree import DecisionTreeClassifier 
+clf = DecisionTreeClassifier()
+```
+
+#### .blue[Regression]:
+
+```Python3
+from sklearn.tree import DecisionTreeRegressor
+rgs = DecisionTreeRegressor()
+```
+
+#### .blue[Parameters]:
+
+```Python3
+criterion = 'entropy' or 'gini'
+max_depth = int or None
+```
+
+#### .blue[User Guide]:
+
+.tiny[[https://scikit-learn.org/stable/modules/tree.html](https://scikit-learn.org/stable/modules/tree.html)] 
 
 ---
 class: left, middle, inverse
@@ -835,452 +911,239 @@ class: left, middle, inverse
 
 * .brown[Introduction]
 
-* .brown[Machine Learning]
+* .brown[Distances]
 
-* .cyan[Deep Learning]
+* .brown[Probabilities]
 
-* Reinforcement Learning
+* .cyan[Rules]
 
-* Unity ML-Agents Toolkit
+  - .brown[Decision Trees]
 
-* Genetic Algorithms
+  - .cyan[Ensembles]
+
+* Hyperplanes
+
+* Learning Theory
 
 * References
 
 ---
 
-# Artificial Neuron Model
+# Ensembles
 
-.center[![:scale 55%](figures/neuron.png)]
+- Emsembles: combination of classifiers for improving generalization
 
-.center[![:scale 60%](figures/neuron_model.png)]
+- Meta-learners
 
-.footnote[Source: [Artificial Neuron](http://www.gabormelli.com/RKB/Artificial_Neuron)]
+- Two big families:
+
+  - .blue[Averaging]: <br> average of predictions <br> improves reducing <br> _Bagging_ & _Random Forests_
+
+  - .blue[Boosting]: <br> incrementally emphasizing in errors <br> improves reducing bias <br> _AdaBoost_ & _Gradient Boosting_
+
+- Any base estimator algorithm, but the most used _Decision Trees_
+
+- User Guide: <br>
+[https://scikit-learn.org/stable/modules/ensemble.html](https://scikit-learn.org/stable/modules/ensemble.html)
 
 ---
 
-# Perceptron
+# Bagging
+
+#### .blue[Algoritm]:
+
+- Set collection by randomly selecting with replacement from original data
+
+- A estimator is built for each of the previous sets
+
+- Prediction by averaging those of previous estimators
+
+#### .blue[sklearn]:
+
+```Python3
+from sklearn.ensemble import BaggingClassifier
+from sklearn.neighbors import KNeighborsClassifier
+bagging = BaggingClassifier(KNeighborsClassifier())
+...
+# In a similar way with BaggingRegressor
+```
+
+#### User Guide: <br>
+.tiny[[https://scikit-learn.org/stable/modules/ensemble.html#bagging](https://scikit-learn.org/stable/modules/ensemble.html#bagging)]
+
+---
+
+# Random Forests
+
+It is a _bagging_ with _decision trees_ variant as base estimator <br>
+
+Nodes in decision trees are selected among a random selection of features
+
+#### .blue[sklearn]
+
+```Python3
+from sklearn.ensemble import RandomForestClassifier
+clf = RandomForestClassifier(n_estimators=10)
+...
+# In a similar way with RandomForestRegressor
+```
+
+#### User Guide: <br>
+[https://scikit-learn.org/stable/modules/ensemble.html#forest](https://scikit-learn.org/stable/modules/ensemble.html#forest)
+
+---
+
+# AdaBoost
+
+#### .blue[Learning].red[*]:
+
+- Learn a weak classifier at each iteration (sample distribution)
+
+- At each iteration increases weight of errors and decreases the rest
+
+.center[![:scale 65%](figures/AB-1.png)]
+
+.footnote[.red[*] .red[Source]: [https://www.cs.cmu.edu/~aarti/Class/10701/slides/Lecture10.pdf](https://www.cs.cmu.edu/~aarti/Class/10701/slides/Lecture10.pdf)]
+
+---
+
+# AdaBoost
+
+#### .blue[Classification].red[*]:
+
+$$H(X)=sign\left(\sum_{t=1}^T\alpha_th(X)\right)$$
+
+.center[![:scale 50%](figures/AB-2.png)]
+
+.footnote[.red[*] .red[Source]: [https://www.cs.cmu.edu/~aarti/Class/10701/slides/Lecture10.pdf](https://www.cs.cmu.edu/~aarti/Class/10701/slides/Lecture10.pdf)]
+
+---
+
+# AdaBoost
+
+#### .blue[sklearn]
+
+```Python3
+from sklearn.ensemble import AdaBoostClassifier
+clf = AdaBoostClassifier()
+...
+# In a similar way with AdaBoostRegressor
+```
+
+Parameters:
+
+```Python3
+n_estimators=10
+```
+
+User Guide: <br>
+[https://scikit-learn.org/stable/modules/ensemble.html#adaboost](https://scikit-learn.org/stable/modules/ensemble.html#adaboost) 
+
+---
+
+# Gradient Boosting
+
+Generalization of boosting by optimizing (gradient descent) loss functions 
+
+.tiny[Instead of training on a newly sample distribution, the weak learner trains on the remaining errors of the strong learner.]
+
+#### sklearn:
+
+```Python3
+from sklearn.ensemble import GradientBoostingClassifier
+clf = GradientBoostingClassifier()
+...
+# In a similar way with GradientBoostingRegressor
+```
+
+Parameters:
+
+```Python3
+n_estimators=10
+max_depth=1
+```
+
+User Guide: <br>
+[https://scikit-learn.org/stable/modules/ensemble.html#gradient-boosting](https://scikit-learn.org/stable/modules/ensemble.html#gradient-boosting)
+
+XGBoost: another implementation <br>
+[https://pandas-ml.readthedocs.io/en/latest/xgboost.html](https://pandas-ml.readthedocs.io/en/latest/xgboost.html)
+
+---
+class: left, middle, inverse
+
+# Outline
+
+* .brown[Introduction]
+
+* .brown[Distances]
+
+* .brown[Probabilities]
+
+* .brown[Rules]
+
+* .cyan[Hyperplanes]
+
+  - .cyan[Kernels]
+
+  - SVM
+
+  - Neural Networks
+
+* Learning Theory
+
+* References
+
+---
+
+# Centroids
+
+![:scale 70%](figures/linClf.png)
+
+---
+
+# Linear Classifier
 
 .cols5050[
 .col1[
 
-- Classification and regression
+#### Given: 
+$P$: positive centroid <br>
+$N$: negative centroid <br>
+$\langle,\rangle$: dot product 
 
-- Linear model
+#### Formulae:
+$W=P-N$ <br>
+$b=\frac{1}{2}(\langle P,P\rangle-\langle N,N\rangle)$ <br>
+$h(T)=sign\left(\langle W,T\rangle+b\right)$
 
-- Classification:
-
-$$h(x)=f(\sum_{i=1}^n w_i x_i + b)$$
-
-- Learning rule:
-
-$$w_i'=w_i+\eta(h(x)-y)$$
 ]
 .col2[
+
+![:scale 50%](figures/dot.png)
+.center[.tiny[[https://sv.wikipedia.org/wiki/Fil:Scalar-product-dot-product.svg](https://sv.wikipedia.org/wiki/Fil:Scalar-product-dot-product.svg)]]
 
 ![:scale 100%](figures/hyperplane.png)
 
 ]]
 
-- Example in sklearn:
-  - [view](codes/nn-sklearn.html) / [download](codes/nn-sklearn.ipynb) / [reference](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Perceptron.html)
-
 ---
 
-# Multi-layer Perceptron
-
-.col5050[
-.col1[- One hidden layer
-
-- Non-linear model
-
-- Classification & regression
-
-- [Backpropagation](https://en.wikipedia.org/wiki/Backpropagation) as training algorithm
-
-- Example in sklearn:
-  - [view](codes/nn-sklearn.html) / [download](codes/nn-sklearn.ipynb) / [reference](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier)
-
-- Main parameters:
-  - hidden_layer_sizes
-  - activation
-  - max_iter
-
-]
-.col2[
-![:scale 110%](figures/mlp.png)
-]]
-
-.footnote[Source: [wikipedia](https://en.wikipedia.org/wiki/Artificial_neural_network)]
-
----
-
-# Bias, Variance & Overfitting
-
-![](figures/bias.png)![](figures/early-stopping.png)
-
-Normal use of a validation set to select parameters & avoid overfitting (to much learning)!
-
-.footnote[Source: [left](https://towardsdatascience.com/regularization-the-path-to-bias-variance-trade-off-b7a7088b4577), [right](https://elitedatascience.com/overfitting-in-machine-learning)]
-
----
-
-# Deep Learning
-
-- Neural network with 2 or more hidden layers
-
-![](figures/chart-1.png)
-
-.cols5050[
-.col1[
-![](figures/chart-2.png)
-]
-.col1[
-**Examples:**
-
-- Sklearn on Iris
-  - [view](codes/nn-sklearn.html) / [download](codes/nn-sklearn.ipynb)
-
-- Keras on MNIST
-  - [view](codes/keras-mlp.html) / [download](codes/keras-mlp.ipynb) / [Source](https://github.com/keras-team/keras)
-]
-]
-
-.footnote[Source: [The Neural Network Zoo](https://www.asimovinstitute.org/neural-network-zoo/)]
-
----
-
-# Convolutional Neural Networks
-
-**from Computer Vision**
-
-to process image & video
-
-![:scale 90%](figures/cnn2.png)
-
-.footnote[Source: [A Comprehensive Guide to Convolutional Neural Networks](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53)]
-
----
-
-# Convolutional Neural Networks II
-
-.cols5050[
-.col1[
-- Convolution: extract the high-level features such as edges
-
-- Pooling: reduce dimensionality for 
-  - computational cost
-  - extracting dominant features which are rotational and positional invariant
-
-- Example:
-  - Keras on MNIST
-  - [view](codes/keras-cnn.html) / [download](codes/keras-cnn.ipynb) / [Source](https://github.com/keras-team/keras)
-]
-.col2[
-![:scale 70%](figures/convolutional.gif)
-
-![:scale 80%](figures/pooling.gif)
-]]
-
-.footnote[Source: [A Comprehensive Guide to Convolutional Neural Networks](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53)]
-
----
-
-# The Neural Network Zoo
-
-![:scale 90%](figures/zoo-1.png)
-
-.footnote[Source: [The Neural Network Zoo](https://www.asimovinstitute.org/neural-network-zoo/)]
-
----
-
-# The Neural Network Zoo II
-
-![:scale 90%](figures/zoo-2.png)
-
-.footnote[Source: [The Neural Network Zoo](https://www.asimovinstitute.org/neural-network-zoo/)]
-
----
-
-# The Neural Network Zoo III
-
-![:scale 90%](figures/zoo-3.png)
-
-.footnote[Source: [The Neural Network Zoo](https://www.asimovinstitute.org/neural-network-zoo/)]
-
----
-class: left, middle, inverse
-
-# Outline
-
-* .brown[Introduction]
-
-* .brown[Machine Learning]
-
-* .brown[Deep Learning]
-
-* .cyan[Reinforcement Learning]
-
-* Unity ML-Agents Toolkit
-
-* Genetic Algorithms
-
-* References
-
----
-
-# Reinforcement Learning
-
-![:scale 65%](figures/rl.png)
-
-.cols5050[
-.col1[
-- an _agent_
-- a set of states $S$
-- a set of actions $A$
-
-]
-.col2[
-Learning a reward function $Q: S \times A \to \mathbb{R}$ for maximizing the total future reward.
-
-]]
-
-- _Q-Learning_: method for learning an aproximation of $Q$.
-
-.footnote[Source: [My Journey Into Deep Q-Learning with Keras and Gym](https://medium.com/@gtnjuvin/my-journey-into-deep-q-learning-with-keras-and-gym-3e779cc12762)]
-
----
-
-# Reinforcement Learning II
-
-Training example:
-
-.center[![:scale 55%](figures/q-matrix.png)]
-
-.footnote[Source: [Reinforcement Q-Learning from Scratch in Python with OpenAI Gym](https://www.learndatasci.com/tutorials/reinforcement-q-learning-scratch-python-openai-gym/)]
-
----
-
-# Reinforcement Learning Example
-
-- Simple example of Q-learning & Q-Table.
-
-.center[[![:scale 65%](figures/ooops.png)](figures/ooops.mp4)]
-
-- [Unity Package](codes/ooops.unitypackage) (in Spanish)
-  - See the folder _Scripts_ in _Assets_
-
----
-
-# Deep Reinforcement Learning I
-
-- Convolutional Neural Network for learning $Q$ <br>
-
-.center[[![:scale 65%](figures/breakout.png)](https://www.youtube.com/watch?v=TmPfTpjtdgg&feature=youtu.be)]
-
-.footnote[Source: [Deep Reinforcement Learning](https://deepmind.com/blog/article/deep-reinforcement-learning)]
-
----
-
-# Deep Reinforcement Learning II
-
-**Example:** 
-
-- CartPole from [OpenAi Gym](https://gym.openai.com/):
-
-.center[![:scale 50%](figures/cartpole.gif)]
-
-- [Deep Q-Learning with Keras and Gym](https://keon.io/deep-q-learning/)
-
----
-class: left, middle, inverse
-
-# Outline
-
-* .brown[Introduction]
-
-* .brown[Machine Learning]
-
-* .brown[Deep Learning]
-
-* .brown[Reinforcement Learning]
-
-* .cyan[Unity ML-Agents Toolkit]
-
-* Genetic Algorithms
-
-* References
-
----
-
-# ML-Agents
-
-Unity plugin for training intelligent agents.
-
-[![:scale 70%](figures/mlagents.png)](https://www.youtube.com/watch?v=Hg3nmYD3DjQ&feature=youtu.be)
-
-Address: https://github.com/Unity-Technologies/ml-agents
-
-Contain .blue[Deep Learning] & .blue[Reinforcement Learning]
-
----
-class: left, middle, inverse
-
-# Outline
-
-* .brown[Introduction]
-
-* .brown[Machine Learning]
-
-* .brown[Deep Learning]
-
-* .brown[Reinforcement Learning]
-
-* .brown[Unity ML-Agents Toolkit]
-
-* .cyan[Genetic Algorithms]
-
-* References
-
----
-
-# Optimisation I
-
-- **Problem**: setting parameters
-
-- Example 1:
-
-    - Strategy Game with diferent kind of units
-
-    - Every unit have diferent attributes (attack, defense, life points)
- 
-    - All the units have to be useful
-
-    - We need to balance them
-
-- Example 2:
-
-    - Game difficulty level adjustment
-
-- Example 3:
-
-    - Setting parameters of a Machine Learning algorithm
-
-- Example 4:
-
-    - Learning behaviour
-
----
-
-# Optimisation II
-
-- Exemple: Strategy Game
-
-  - 10 unit types
-
-  - 3 attributes (attack, defense, life)
-
-  - 20 possible values (1..20)
-
-  - possible combinations will be $20^{3\times 10}$
-
-  - testing all combinations is impossible
-
-- **Solution**: 
-
-  - Find a _reasonably_ good solution in a limited time
-
-  - .blue[Optimisation algorithms]
-
----
-
-# Genetic Algorithm I
-
-Given a problem $P$ with a solution space $S$, the main components are:
-
-- .blue[Chromosome] (solution): collection of .blue[genes] (parameters)
-
-- .blue[Population]: collection of chromosomes
-
-- .blue[Fitness function]: scores how good is a solution
-
-- .blue[Selection]: selects best chromosomes
-
-- .blue[Crossover]: from 2 random chromosomes & a random point:
-  * requirements: $2\times n$ parents for each $n$ new chromosomes
-
-.center[![:scale 50%](figures/crossover.png)]
-
----
-
-# Genetic Algorithm II
-
-- .blue[Mutation]: change a value
-  - Probability of mutation (<10%)
-  - Random index
-  - Random number to add or substract
-
-.center[![:scale 50%](figures/mutation.png)]
-
-.cols5050[
-.col1[
-**Algorithm:**
-
-```
-1. Random Population
-2. Compute fitness
-3. Selection 
-4. Crossover
-5. Mutation
-6. Go to step 2
-```
-
-- Example: [demo](figures/maze.mp4) / [reference](https://github.com/Sebastian-Schuchmann/Genetic-Algorithm-in-Unity3D)
-]
-.col2[
-![:scale 75%](figures/ga-plot.png)
-]]
-
-
----
-class: left, middle, inverse
-
-# Outline
-
-* .brown[Introduction]
-
-* .brown[Machine Learning]
-
-* .brown[Deep Learning]
-
-* .brown[Reinforcement Learning]
-
-* .brown[Unity ML-Agents Toolkit]
-
-* .brown[Genetic Algorithms]
-
-* .cyan[References]
+# Linear Classifier
+
+#### Example:
+$W=[1.67, -1.67]$ <br>
+$b=0.1637$ <br>
+$h([2,3])=+1$ <br>
+$h([1,4])=-1$
+
+#### [Implementation](codes/linc.html)
 
 ---
 
 # References
 
-- Ian Millington. _AI for Games_ (3rd edition). CRC Press, 2019.
+- Aurélien Géron. _Hands-On Machine Learning with Scikit-Learn, Keras | Tensorflow_, 2nd Edition. O'Reilly, 2019.
 
-- Gerard Escudero. [_Supervised Machine Learning_](https://gebakx.github.io/classification/slides/machineLearning.pdf). 2019. 
-
-- Sefik Ilkin Serengil. [_A Step by Step CART Decision Tree Example_](https://sefiks.com/2018/08/27/a-step-by-step-cart-decision-tree-example/). 2018. It also contains a regression example.
-
-- Aurélien Géron. _Hands-On Machine Learning with Scikit-Learn, Keras & Tensorflow_, 2nd Edition. O'Reilly, 2019.
-
-- [_Keras Documentation_](https://keras.io/). 
-
-- DeepMind. [Deep Reinforcement Learning](https://deepmind.com/blog/article/deep-reinforcement-learning).
-
-- Micheal Lanham. _Learn Unity ML-Agents - Fundamental of Unity Machine Learning_. Packt, 2018.
-
-- Károly Zsolnai-Fehér. [OpenAI Plays Hide and Seek…and Breaks The Game!](https://www.youtube.com/watch?v=Lu56xVlZ40M). Two Minute Papers.
-
-- Károly Zsolnai-Fehér. [DeepMind’s AlphaStar: A Grandmaster Level StarCraft 2 AI](https://www.youtube.com/watch?v=jtlrWblOyP4). Two Minute Papers.
-
+- Gerard Escudero. _Machine Learning for Games_. (https://gebakx.github.io/ml-games/#1)[https://gebakx.github.io/ml-games/#1]
 
