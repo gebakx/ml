@@ -1113,10 +1113,18 @@ $N$: negative centroid <br>
 $\langle,\rangle$: dot product 
 
 #### Formulae:
-$W=P-N$ <br>
-$b=\frac{1}{2}(\langle P,P\rangle-\langle N,N\rangle)$ <br>
+
 $h(T)=sign\left(\langle W,T\rangle+b\right)$
 
+where:
+
+$W=P-N$ 
+
+$b=\frac{1}{2}(\langle P,P\rangle-\langle N,N\rangle)$
+
+#### Implementation:
+
+([html](codes/cl.html) / [ipynb](codes/cl.ipynb))
 ]
 .col2[
 
@@ -1129,15 +1137,267 @@ $h(T)=sign\left(\langle W,T\rangle+b\right)$
 
 ---
 
-# Linear Classifier
+# Linear Separability
 
-#### Example:
-$W=[1.67, -1.67]$ <br>
-$b=0.1637$ <br>
-$h([2,3])=+1$ <br>
-$h([1,4])=-1$
+Next data set is .blue[linearly not separable]
 
-#### [Implementation](codes/linc.html)
+.center[![:scale 65%](figures/rbf.png)]
+ 
+.blue[Kernels] try to convert data sets to linearly separables through projections
+
+---
+
+# Kernels
+
+Given a projection function $\phi(X)$ so as.red[*]:
+
+.center[![:scale 70%](figures/kernels.png)]
+
+a .blue[kernel] will be:
+
+$$\kappa(X,Z)=\langle\phi(X),\phi(Z)\rangle$$
+
+.footnote[.red[*] .red[source]: [https://en.wikipedia.org/wiki/File:Kernel_Machine.svg](https://en.wikipedia.org/wiki/File:Kernel_Machine.svg)]
+
+
+---
+
+# Kernels
+
+Kernel matrix:
+
+![:scale 60%](figures/kernelMatrix.png)
+
+Usual Kernels.red[*]
+
+- .blue[linear]: $\langle X,Z\rangle$
+
+- .blue[polynomial]: $(\gamma\langle X,Z\rangle+r)^d$
+
+- .blue[rbf] (radial basis function): $\exp(-\gamma\Vert X-Z\Vert^2)$
+
+.footnote[.red[*] in sklearn: [https://scikit-learn.org/stable/modules/svm.html#svm-kernels](https://scikit-learn.org/stable/modules/svm.html#svm-kernels)]
+
+
+---
+
+# Kernel Centroids
+
+Prediction function: 
+
+![:scale 90%](figures/kernelCentroids.png)
+
+<!---
+$$h(T)=\sign\left(\frac{1}{\vert p\vert}\sum_{\lbrace i\vert y_i=+1\rbrace}\kappa(T,X_i) - \frac{1}{\vert n\vert}\sum_{\lbrace i\vert y_i=-1\rbrace}\kappa(T,X_i) -b \right)$$
+-->
+
+#### Implementation:
+
+([html](codes/kernels.html) / [ipynb](codes/kernels.ipynb))
+
+---
+
+# Some issues
+
+- Kernels has been applied to many algorithms:
+
+  - Centroids
+
+  - PCA
+
+  - k-means
+
+  - SVMs
+
+- Kernels can be adapted to the problem as another way to represent data
+
+  - There are many kernels for structured data: trees, graphs, sets... <br>
+Example: kernel for sets
+
+$$\kappa(X,Z)=2^{\vert X\cap Z\vert}$$
+
+---
+
+# Kernel PCA
+
+Representation of previous linearly no separable data set: 
+
+![:scale 45%](figures/kpca.png)
+
+#### sklearn
+
+```Python3
+from sklearn.decomposition import KernelPCA
+kpca = KernelPCA(kernel='rbf', gamma=1)
+```
+
+#### User Guide: <br>
+[https://scikit-learn.org/stable/modules/decomposition.html#kernel-pca](https://scikit-learn.org/stable/modules/decomposition.html#kernel-pca)
+
+---
+class: left, middle, inverse
+
+# Outline
+
+* .brown[Introduction]
+
+* .brown[Distances]
+
+* .brown[Probabilities]
+
+* .brown[Rules]
+
+* .cyan[Hyperplanes]
+
+  - .brown[Kernels]
+
+  - .cyan[SVM]
+
+  - Neural Networks
+
+* Learning Theory
+
+* References
+
+---
+
+# Support Vector Machines
+
+#### Which are the best .blue[hyperplanes]?
+ 
+.center[![:scale 65%](figures/svm-1.png)]
+
+Those that maximize the .blue[margin].
+
+---
+
+# Support Vectors
+
+#### What are the .blue[support vectors]?
+
+.center[![:scale 65%](figures/svm-2.png)]
+
+Those nearest the margin.
+
+---
+
+# Classification
+
+#### Prediction functions:
+
+- Linear:
+
+$$h(T)=\langle W,T\rangle + b = b + \sum_{\lbrace i\vert X_i\in SVs\rbrace} y_i \alpha_i \langle X_i,T\rangle$$
+
+- General kernel:
+
+$$h(T)=\langle W,\phi(T)\rangle + b = b + \sum_{\lbrace i\vert X_i\in SVs\rbrace} y_i \alpha_i \kappa(X_i,T)$$
+
+---
+
+# Soft Margin
+
+#### SVMs allows some errors in the hyperplanes: 
+
+.center[![:scale 65%](figures/svm-3.png)]
+
+This is called .blue[soft margin].
+
+---
+
+# Kernels in SVMs
+
+- SVMs support kernels.red[*]:
+
+![:scale 45%](figures/svm-4.png)
+![:scale 45%](figures/svm-6.png)
+![:scale 45%](figures/svm-5.png)
+
+- It also support .blue[custom kernels].
+
+.footnote[.red[*] .red[Source]: [https://scikit-learn.org/stable/modules/svm.html#svm-classification](https://scikit-learn.org/stable/modules/svm.html#svm-classification)]
+
+---
+
+# Support Vector Regression
+
+- Which is the model for .blue[regression]? 
+
+![:scale 75%](figures/svr.png)
+
+- It has an additional parameter: the $\varepsilon$-tube
+
+.footnote[.red[*] .red[Source]: [https://www.saedsayad.com/support_vector_machine_reg.htm](https://www.saedsayad.com/support_vector_machine_reg.htm)]
+
+---
+
+# sklearn
+
+#### Classification: 
+
+```Python3
+from sklearn.svm import SVC
+clf = SVC()
+```
+
+#### Regression: 
+
+```Python3
+from sklearn.svm import SVR
+rgs = SVR()
+```
+
+#### Parameters:
+
+```Python3
+kernel = 'linear', 'poly', 'rbf', 'precomputed'...
+degree = 2, 3...
+gamma = 'scale', 1, 0.1, 10...
+C = 1, 10, 0.1  # penalty of soft margin
+epsilon = 0.1
+max_iter = -1, 1000...
+```
+
+#### User Guide: <br>
+[https://scikit-learn.org/stable/modules/svm.html#svm-classification](https://scikit-learn.org/stable/modules/svm.html#svm-classification)
+
+---
+class: left, middle, inverse
+
+# Outline
+
+* .brown[Introduction]
+
+* .brown[Distances]
+
+* .brown[Probabilities]
+
+* .brown[Rules]
+
+* .brown[Hyperplanes]
+
+* .cyan[Learning Theory]
+
+* References
+
+---
+class: left, middle, inverse
+
+# Outline
+
+* .brown[Introduction]
+
+* .brown[Distances]
+
+* .brown[Probabilities]
+
+* .brown[Rules]
+
+* .brown[Hyperplanes]
+
+* .brown[Learning Theory]
+
+* .cyan[References]
 
 ---
 
@@ -1145,5 +1405,5 @@ $h([1,4])=-1$
 
 - Aurélien Géron. _Hands-On Machine Learning with Scikit-Learn, Keras | Tensorflow_, 2nd Edition. O'Reilly, 2019.
 
-- Gerard Escudero. _Machine Learning for Games_. (https://gebakx.github.io/ml-games/#1)[https://gebakx.github.io/ml-games/#1]
+- Gerard Escudero. _Machine Learning for Games_, 2019. ([available on-line](https://gebakx.github.io/ml-games/#1))
 
