@@ -1309,9 +1309,10 @@ This is called .blue[soft margin].
 
 - SVMs support kernels.red[*]:
 
-![:scale 45%](figures/svm-4.png)
-![:scale 45%](figures/svm-6.png)
-![:scale 45%](figures/svm-5.png)
+![:scale 30%](figures/svm-4.png)
+![:scale 30%](figures/svm-6.png)
+
+![:scale 35%](figures/svm-5.png)
 
 - It also support .blue[custom kernels].
 
@@ -1333,19 +1334,24 @@ This is called .blue[soft margin].
 
 # sklearn
 
+.cols5050[
+.col1[
 #### Classification: 
 
 ```Python3
 from sklearn.svm import SVC
 clf = SVC()
 ```
+]
 
+.col2[
 #### Regression: 
 
 ```Python3
 from sklearn.svm import SVR
 rgs = SVR()
 ```
+]]
 
 #### Parameters:
 
@@ -1360,6 +1366,142 @@ max_iter = -1, 1000...
 
 #### User Guide: <br>
 [https://scikit-learn.org/stable/modules/svm.html#svm-classification](https://scikit-learn.org/stable/modules/svm.html#svm-classification)
+
+---
+class: left, middle, inverse
+
+# Outline
+
+* .brown[Introduction]
+
+* .brown[Distances]
+
+* .brown[Probabilities]
+
+* .brown[Rules]
+
+* .cyan[Hyperplanes]
+
+  - .brown[Kernels]
+
+  - .brown[SVM]
+
+  - .cyan[Neural Networks]
+
+* Learning Theory
+
+* References
+
+---
+
+# Artificial Neuron Model
+
+.center[![:scale 55%](figures/neuron.png)]
+
+.center[![:scale 60%](figures/neuron_model.png)]
+
+.footnote[Source: [Artificial Neuron](http://www.gabormelli.com/RKB/Artificial_Neuron)]
+
+---
+
+# Perceptron
+
+.cols5050[
+.col1[
+
+- Classification and regression
+
+- Linear model
+
+- Classification:
+
+$$h(x)=f(\sum_{i=1}^n w_i x_i + b)$$
+
+- Learning rule:
+
+$$w_i'=w_i+\eta(h(x)-y)$$
+]
+.col2[
+
+![:scale 100%](figures/hyperplane.png)
+
+.center[![:scale 70%](figures/logisticCurve.png)]
+
+]]
+
+---
+
+# sklearn
+
+#### Classification:
+
+```python3
+from sklearn.linear_model import Perceptron
+clf = Perceptron()
+```
+
+#### Parameters:
+
+```Python3
+max_iter: default=1000
+```
+
+#### User guide: <br>
+.tiny[[https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Perceptron.html](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Perceptron.html)]
+
+---
+
+# Multi-layer Perceptron
+
+.col5050[
+.col1[- One hidden layer
+
+- Non-linear model
+
+- Classification & regression
+
+- [Backpropagation](https://en.wikipedia.org/wiki/Backpropagation) as training algorithm
+]
+.col2[
+![:scale 110%](figures/mlp.png)
+]]
+
+- Activation functions:
+  - ‘identity’: $f(x) = x$
+  - ‘logistic’, $f(x) = 1 / (1 + exp(-x))$
+  - ‘tanh’, $f(x) = tanh(x)$
+  - ‘relu’, $f(x) = max(0, x)$
+
+.footnote[Source: [wikipedia](https://en.wikipedia.org/wiki/Artificial_neural_network)]
+
+---
+
+# sklearn
+
+#### Classification:
+
+```python3
+from sklearn.neural_network import MLPClassifier
+clf = MLPClassifier(hidden_layer_sizes=(25,))
+```
+
+#### Regressor:
+
+```python3
+from sklearn.neural_network import MLPRegressor
+clf = MLPRegressor(hidden_layer_sizes=(25,))
+```
+
+#### Parameters:
+
+```Python3
+hidden_layer_sizes: default (100,)
+max_iter: default=200
+```
+
+#### User Guide: <br>
+.tiny[[https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier)]
+
 
 ---
 class: left, middle, inverse
