@@ -1523,6 +1523,60 @@ class: left, middle, inverse
 * References
 
 ---
+
+# Bias & variance example
+
+- if 11 red points are the available data set:
+
+.center[![:scale 55%](figures/bias.png)]
+
+- it can be approximated by:
+  - a 10-degree polynomial: $R^2=1.0$
+  - a straight line: $R^2=0.122$
+
+- What happens to 5.5?
+
+---
+
+# Bias & Variance
+
+![:scale 45%](figures/bias2.png)
+![:scale 50%](figures/bias3.png)
+
+.footnote[.red[Source]: [https://towardsdatascience.com/regularization-the-path-to-bias-variance-trade-off-b7a7088b4577](https://towardsdatascience.com/regularization-the-path-to-bias-variance-trade-off-b7a7088b4577)]
+
+---
+
+# Bias & Variance
+
+.cols5050[
+.col1[
+![:scale 90%](figures/bias4.png)
+]
+
+.col2[
+1. trade-off
+2. overfitting == low bias, high variance
+3. underfitting == high bias, low variance
+4. noise domine
+]]
+
+.footnote[.red[Source]: [https://towardsdatascience.com/regularization-the-path-to-bias-variance-trade-off-b7a7088b4577](https://towardsdatascience.com/regularization-the-path-to-bias-variance-trade-off-b7a7088b4577)]
+
+---
+
+# Gold Rules in Learning
+
+- .blue[Occam's razor in learning]: <br><br>
+simpler models are more likely to be correct than complex ones
+
+- .blue[No free lunch theorem]: <br><br>
+there is no method which outperforms all others for all data sets
+
+- .blue[Curse of dimensionality]: <br><br>
+when the dimensionality increases the amount of data needed to support the result often grows exponentially
+
+---
 class: left, middle, inverse
 
 # Outline
@@ -1547,5 +1601,17 @@ class: left, middle, inverse
 
 - Aurélien Géron. _Hands-On Machine Learning with Scikit-Learn, Keras | Tensorflow_, 2nd Edition. O'Reilly, 2019.
 
-- Gerard Escudero. _Machine Learning for Games_, 2019. ([available on-line](https://gebakx.github.io/ml-games/#1))
+- Gerard Escudero. _Machine Learning for Games_, 2019. ([url](https://gebakx.github.io/ml-games/#1))
+
+- UCI Machine Learning Repository ([url](http://archive.ics.uci.edu/ml/index.php))
+
+- jupyter: interative computing ([url](https://jupyter.org/documentation))
+
+- pandas: python data analysis library ([url](http://pandas.pydata.org/pandas-docs/stable/))
+
+- scikit-learn: machine learning in python ([url](https://scikit-learn.org/stable/index.html))
+
+- pandas-ml: pandas machine learning ([url](https://pandas-ml.readthedocs.io/en/latest/index.html)
+
+- tutorial markdown: lightweight syntax for writing ([url](https://guides.github.com/features/mastering-markdown/))
 
