@@ -1556,8 +1556,11 @@ class: left, middle, inverse
 
 .col2[
 1. trade-off
+
 2. overfitting == low bias, high variance
+
 3. underfitting == high bias, low variance
+
 4. noise domine
 ]]
 
