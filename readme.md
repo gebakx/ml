@@ -38,12 +38,12 @@ class: left, middle, inverse
 .center[
 class      | sepal <br> length | sepal <br> width | petal <br> length | petal <br> width 
 :--------- | -----: | ----: | -----: | ----: 
-setosa     | 5.1    | 3.5   | 1.4    | 0.2   
-setosa     | 4.9    | 3.0   | 1.4    | 0.2   
-versicolor | 6.1    | 2.9   | 4.7    | 1.4   
-versicolor | 5.6    | 2.9   | 3.6    | 1.3    
-virginica  | 7.6    | 3.0   | 6.6    | 2.1    
-virginica  | 4.9    | 2.5   | 4.5    | 1.7   
+setosa     | 5.1    | 3.5   | 1.4    | 0.2 
+setosa     | 4.9    | 3.0   | 1.4    | 0.2 
+versicolor | 6.1    | 2.9   | 4.7    | 1.4 
+versicolor | 5.6    | 2.9   | 3.6    | 1.3 
+virginica  | 7.6    | 3.0   | 6.6    | 2.1 
+virginica  | 4.9    | 2.5   | 4.5    | 1.7 
 150 rows or examples (50 per class).red[*] 
 ]
 
@@ -52,7 +52,7 @@ virginica  | 4.9    | 2.5   | 4.5    | 1.7
 * The matrix of the rest of columns (.blue[attributes] or .blue[features]) is usually referred
 as matrix .blue[_X_]
 
-.footnote[.red[*] _Source_ : _Iris_ problem UCI repository (Frank | Asunción, 2010)]
+.footnote[.red[*] _Source_ : _Iris_ problem UCI repository (Frank & Asunción, 2010)]
 
 ---
 
@@ -79,7 +79,7 @@ quality | density | pH   | sulphates | alcohol
 8       | 0.9973  | 3.35 | 0.86      | 12.8
 3       | 0.9994  | 3.16 | 0.63      | 8.4
 7       | 0.99514 | 3.44 | 0.68      | 10.55
-1599 examples | 12 columns (11 attributes + 1 target).red[*]
+1599 examples & 12 columns (11 attributes + 1 target).red[*]
 ]
 
 The main diference between classification and regression is the _Y_ or target values:
@@ -90,7 +90,7 @@ Example: _Iris_, {“setosa”, “virginica”, “versicolor”}.
 * .blue[Regression]: continuous or real values <br>
 Example: _WineQuality_, values from 0 to 10.
 
-.footnote[.red[*] _Source_ : _wine quality_ problem from UCI repository (Frank | Asunción, 2010)]
+.footnote[.red[*] _Source_ : _wine quality_ problem from UCI repository (Frank & Asunción, 2010)]
  
 
 ---
@@ -210,7 +210,7 @@ Unseen regression example on _WineQuality_]
 # 1 Nearest Neighbors algorithm
 
 ### Algorithm
-* classification | regression
+* classification & regression
 
 $$h(T)=y_i$$
 
@@ -242,11 +242,11 @@ $$h(T)=average(S)\text{, if regression}$$
 
 ### Examples
 
-- .blue[classification]: Iris | euclidean distance
+- .blue[classification]: Iris & euclidean distance
 
 $$h(T)=mode({setosa, setosa, versicolor})=setosa$$
 
-- .blue[regression]: WineQuality | euclidean distance
+- .blue[regression]: WineQuality & euclidean distance
 
 $$h(T)=average({6,4,7})=5.7$$
 
@@ -348,7 +348,7 @@ class: left, middle, inverse
 
 #### .blue[Classify]: apply 1NN with centroids as data 
 
-#### Example: Iris | euclidean distance 
+#### Example: Iris & euclidean distance 
 
 $$distances = (0.23, 3.09, 4.65)$$
 
@@ -411,11 +411,11 @@ class: left, middle, inverse
 | edible     | convex    | yellow    | broad     | brown      |
 | edible     | bell      | white     | broad     | brown      |
 | poisonous  | convex    | white     | narrow    | pink       |
-.center[up to 8 124 examples | 22 attributes .red[*]]
+.center[up to 8 124 examples & 22 attributes .red[*]]
 
 - What is .blue[$P(poisonous)$]?
 
-.footnote[.red[*]  _Source_ : _Mushroom_ problem from UCI repository (Frank | Asunción, 2010)]
+.footnote[.red[*]  _Source_ : _Mushroom_ problem from UCI repository (Frank & Asunción, 2010)]
 
 ---
 
@@ -557,7 +557,7 @@ class: left, middle, inverse
 
 # Linear Discriminant Analysis
 
-also from bayes rule | gaussian distributions:
+also from bayes rule & gaussian distributions:
 
 $$h(T)\simeq argmax_y\frac{P(T|y)P(y)}{P(T)}$$
 
@@ -709,13 +709,13 @@ class: left, middle, inverse
 | edible | convex | yellow | brown |
 | edible | bell | white | brown |
 | poisonous | convex | white | pink |
-.center[up to 8124 examples | 22 attributes.red[*]]
+.center[up to 8124 examples & 22 attributes.red[*]]
 
 - Which rules can be extracted from data? 
 
 .blue[$$\text{gill-color}=\text{pink}\Longrightarrow\text{poisonous}$$]
 
-.footnote[.red[*] .red[Source]: ``mushroom'' problem from UCI Repository (Frank | Asunción, 2010)]
+.footnote[.red[*] .red[Source]: ``mushroom'' problem from UCI Repository (Frank & Asunción, 2010)]
 
 ---
 
@@ -937,7 +937,7 @@ class: left, middle, inverse
 
 - Two big families:
 
-  - .blue[Averaging]: <br> average of predictions <br> improves reducing <br> _Bagging_ & _Random Forests_
+  - .blue[Averaging]: <br> average of predictions <br> improves reducing variance <br> _Bagging_ & _Random Forests_
 
   - .blue[Boosting]: <br> incrementally emphasizing in errors <br> improves reducing bias <br> _AdaBoost_ & _Gradient Boosting_
 
@@ -1417,6 +1417,8 @@ class: left, middle, inverse
 
 $$h(x)=f(\sum_{i=1}^n w_i x_i + b)$$
 
+$$f=step\ function$$
+
 - Learning rule:
 
 $$w_i'=w_i+\eta(h(x)-y)$$
@@ -1425,7 +1427,9 @@ $$w_i'=w_i+\eta(h(x)-y)$$
 
 ![:scale 100%](figures/hyperplane.png)
 
-.center[![:scale 70%](figures/logisticCurve.png)]
+.center[![:scale 70%](figures/step.png)]
+
+.tiny[.red[*] Source: [wikipedia](https://en.wikipedia.org/wiki/Heaviside_step_function)]
 
 ]]
 
@@ -1454,25 +1458,56 @@ max_iter: default=1000
 # Multi-layer Perceptron
 
 .col5050[
-.col1[- One hidden layer
+.col1[
+- Hidden layers
 
 - Non-linear model
 
 - Classification & regression
 
-- [Backpropagation](https://en.wikipedia.org/wiki/Backpropagation) as training algorithm
+- Forward propagation of perceptrons
+
+- Backpropagation as training algorithm <br>
+Gradient descent (optimization)
+
+$$W^{t+1}=W^t-\eta\frac{\partial loss}{\partial W}$$
+
+$$W=\{w,b\}$$
+
+$$\eta=learning\ rate$$
+
+$$loss=training\ error$$
 ]
 .col2[
 ![:scale 110%](figures/mlp.png)
 ]]
 
-- Activation functions:
-  - ‘identity’: $f(x) = x$
-  - ‘logistic’, $f(x) = 1 / (1 + exp(-x))$
-  - ‘tanh’, $f(x) = tanh(x)$
-  - ‘relu’, $f(x) = max(0, x)$
 
 .footnote[Source: [wikipedia](https://en.wikipedia.org/wiki/Artificial_neural_network)]
+
+---
+
+# Components
+
+#### Loss functions
+
+- Regression: minimum squared error or root minimum squared error
+
+- Binary classification: binary cross entropy
+
+- Multiclass classification: categorical cross entropy
+
+#### Activation functions
+
+- Hidden units: ReLU $f(x)=max(0,x)$
+
+- Output
+  - Regression: linear $f(x) = x$
+
+  - Binary classification: sigmoid $f(x) = 1 / (1 + exp(-x))$
+
+  - Multiclass classification: softmax (one unit per class) <br>
+maximum value after normalizing as distribution
 
 ---
 
@@ -1492,16 +1527,33 @@ from sklearn.neural_network import MLPRegressor
 clf = MLPRegressor(hidden_layer_sizes=(25,))
 ```
 
-#### Parameters:
-
-```Python3
-hidden_layer_sizes: default (100,)
-max_iter: default=200
-```
-
 #### User Guide: <br>
 .tiny[[https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.neural_network.MLPClassifier.html#sklearn.neural_network.MLPClassifier)]
 
+---
+
+# Parameters:
+
+```Python3
+# numer of units per hidden layer
+hidden_layer_sizes: default (100,)
+# training examples per step 
+batch_size=default min(200, n_samples)
+# epochs: training of all training examples one time
+max_iter: default=200
+# learning rate (eta)
+learning_rate_init: default=0.001
+...
+```
+
+#### Learning rate ($\eta$)
+
+- Experimentally adjusted
+  - low values $\rightarrow$ good performance, high computational time
+  - high values $\rightarrow$ erratic (jumps) search, low computational time
+  - trade-off (experimentally)
+
+- Could be adaptative
 
 ---
 class: left, middle, inverse
@@ -1568,6 +1620,41 @@ class: left, middle, inverse
 
 ---
 
+# Underfitting and overfitting
+
+.cols5050[
+.col1[
+#### .blue[Underfitting] (bias)
+
+- Symptoms: Training error too high
+
+- Causes: 
+  - model too simple
+  - not enough training
+
+- Solutions: 
+  - increase model complexity
+  - train longer
+]
+.col2[
+#### .blue[Overfitting] (variance)
+
+- Symptoms: test error low
+
+- Causes: 
+  - model too complex
+  - too much training
+  - training set too small
+
+- Solutions: 
+  - reduce model complexity
+  - stop training (early stopping)
+  - get more training data / data augmentation
+
+]]
+
+---
+
 # Gold Rules in Learning
 
 - .blue[Occam's razor in learning]: <br><br>
@@ -1602,7 +1689,9 @@ class: left, middle, inverse
 
 # References
 
-- Aurélien Géron. _Hands-On Machine Learning with Scikit-Learn, Keras | Tensorflow_, 2nd Edition. O'Reilly, 2019.
+- Aurélien Géron. _Hands-On Machine Learning with Scikit-Learn, Keras & Tensorflow_, 2nd Edition. O'Reilly, 2019.
+
+- Samir Kanaan. _Neural Networks and Deep Learning. Improving your Neural Networks_, 2020.
 
 - Gerard Escudero. _Machine Learning for Games_, 2019. ([url](https://gebakx.github.io/ml-games/#1))
 
@@ -1614,7 +1703,7 @@ class: left, middle, inverse
 
 - scikit-learn: machine learning in python ([url](https://scikit-learn.org/stable/index.html))
 
-- pandas-ml: pandas machine learning ([url](https://pandas-ml.readthedocs.io/en/latest/index.html)
+- pandas-ml: pandas machine learning ([url](https://pandas-ml.readthedocs.io/en/latest/index.html))
 
 - tutorial markdown: lightweight syntax for writing ([url](https://guides.github.com/features/mastering-markdown/))
 
